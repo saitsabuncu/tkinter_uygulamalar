@@ -17,10 +17,11 @@ def button_click(value):
             result = eval(entry_field.get())
             if "/0" in entry_field.get():
                 raise ZeroDivisionError
+            formatted_result = f"{result:,}"  # Binlik ayırıcı ekle
             entry_field.delete(0, tk.END)
-            entry_field.insert(tk.END, str(result))
+            entry_field.insert(tk.END, formatted_result)
             # Geçmişi güncelle
-            history.append(f"{entry_field.get()} = {result}")
+            history.append(f"{entry_field.get()} = {formatted_result}")
             update_history()
         except ZeroDivisionError:
             entry_field.delete(0, tk.END)
