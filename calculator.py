@@ -1,6 +1,8 @@
 import tkinter as tk
 
 memory = 0  # Bellek değişkeni
+dark_mode = False  # Tema durumu: Varsayılan olarak açık tema
+
 # Tuşların işlevi
 def button_click(value):
     global memory
@@ -47,6 +49,23 @@ def button_click(value):
     else:
         entry_field.insert(tk.END, value)
 
+def change_theme():
+    global dark_mode
+    if not dark_mode: # Karanlık moda geçiş
+        window.config(bg='black')
+        entry_field.config(bg="black", fg="white")
+
+        for button in all_buttons:
+            button.config(bg="gray", fg="white")
+        theme_button.config(text="Varsayılan Mod")
+        dark_mode = True
+    else:  # Varsayılan moda dönüş
+        window.config(bg="white")
+        entry_field.config(bg="white", fg="black")
+        for button in all_buttons:
+            button.config(bg="lightgray", fg="black")
+        theme_button.config(text="Karanlık Mod")
+        dark_mode = False
 # Tkinter penceresi
 window = tk.Tk()
 window.title("Hesap Makinesi")
@@ -69,10 +88,22 @@ buttons = [
 ]
 
 # Tuşları oluştur ve yerleştir
+all_buttons = []
 for i, row in enumerate(buttons):
     for j, button in enumerate(row):
-        tk.Button(window, text=button, font=("Arial", 18), command=lambda value=button: button_click(value),
-                  width=5, height=2, relief="raised", borderwidth=2).grid(row=i+1, column=j, padx=5, pady=5)
+        btn=tk.Button(window, text=button, font=("Arial", 18),
+                      command=lambda value=button: button_click(value),
+                        width=5, height=2, relief="raised", borderwidth=2,
+                      bg="lightgray", fg="black")
+        btn.grid(row=i + 1, column=j, padx=5, pady=5)
+        all_buttons.append(btn)
+
+# Tema değiştirme butonu
+theme_button = tk.Button(window, text="Karanlık Mod", font=("Arial", 14),
+                         command=change_theme, width=20)
+theme_button.grid(row=7, column=0, columnspan=4, pady=10)
+
+
 
 # Tkinter döngüsü
 window.mainloop()
