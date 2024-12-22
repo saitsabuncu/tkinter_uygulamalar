@@ -1,4 +1,6 @@
 import tkinter as tk
+from math import sin, cos, tan, log, sqrt
+
 
 memory = 0  # Bellek değişkeni
 dark_mode = False  # Tema durumu
@@ -50,9 +52,70 @@ def button_click(value):
     elif value == 'MR': # Belleği getir
         entry_field.delete(0, tk.END)
         entry_field.insert(tk.END, str(memory))
-
+    elif value == "sin":
+        result = sin(float(entry_field.get()))
+        entry_field.delete(0, tk.END)
+        entry_field.insert(tk.END, result)
+    elif value == "cos":
+        result = cos(float(entry_field.get()))
+        entry_field.delete(0, tk.END)
+        entry_field.insert(tk.END, result)
+    elif value == "tan":
+        result = tan(float(entry_field.get()))
+        entry_field.delete(0, tk.END)
+        entry_field.insert(tk.END, result)
+    elif value == "log":
+        result = log(float(entry_field.get()))
+        entry_field.delete(0, tk.END)
+        entry_field.insert(tk.END, result)
+    elif value == "√":
+        result = sqrt(float(entry_field.get()))
+        entry_field.delete(0, tk.END)
+        entry_field.insert(tk.END, result)
     else:
         entry_field.insert(tk.END, value)
+
+def update_buttons(button_set):
+    """Dinamik olarak butonları günceller."""
+    for btn in all_buttons:
+        btn.grid_forget()  # Mevcut butonları kaldır
+    all_buttons.clear()  # Listeyi temizle
+    for i, row in enumerate(button_set):
+        for j, button in enumerate(row):
+            btn = tk.Button(window, text=button, font=("Arial", 18),
+                            command=lambda value=button: button_click(value),
+                            relief="raised", borderwidth=2, bg="lightgray", fg="black")
+            btn.grid(row=i+1, column=j, sticky="nsew", padx=5, pady=5)
+            all_buttons.append(btn)
+
+def switch_to_standard():
+    """Standart mod tuşlarını yükler."""
+    button_set = [
+        ["C", "CE", "%", "/"],
+        ["7", "8", "9", "*"],
+        ["4", "5", "6", "-"],
+        ["1", "2", "3", "+"],
+        ["+/-", "0", ".", "="],
+        ["MC", "M+", "M-", "MR"]
+    ]
+    update_buttons(button_set)
+    # Geçmiş kutusunu standart modda göster
+    history_listbox.grid(row=8, column=0, columnspan=4, padx=10, pady=10)
+
+def switch_to_scientific():
+    """Bilimsel mod tuşlarını yükler."""
+    button_set = [
+        ["C", "CE", "sin", "cos"],
+        ["tan", "log", "√", "^"],
+        ["7", "8", "9", "*"],
+        ["4", "5", "6", "-"],
+        ["1", "2", "3", "+"],
+        ["+/-", "0", ".", "="]
+    ]
+    update_buttons(button_set)
+    # Geçmiş kutusunu bilimsel modda gizle
+    history_listbox.grid_forget()
+
 
 def change_theme():
     global dark_mode
@@ -97,8 +160,8 @@ entry_field = tk.Entry(window, font=("Arial", 24), borderwidth=2, relief="solid"
                        justify="right")
 entry_field.grid(row=0, column=0, columnspan=4, ipadx=8, ipady=25, padx=10, pady=10)
 
-# Tuşlar
-buttons = [
+
+#buttons = [
     ["C", "CE", "%", "/"],
     ["7", "8", "9", "*"],
     ["4", "5", "6", "-"],
@@ -109,19 +172,18 @@ buttons = [
 
 # Tuşları oluştur ve yerleştir
 all_buttons = []
-for i, row in enumerate(buttons):
-    for j, button in enumerate(row):
-        btn=tk.Button(window, text=button, font=("Arial", 18),
-                      command=lambda value=button: button_click(value),
-                        width=5, height=2, relief="raised", borderwidth=2,
-                      bg="lightgray", fg="black")
-        btn.grid(row=i + 1, column=j, padx=5, pady=5)
-        all_buttons.append(btn)
+switch_to_standard()
+
+# Mod düğmeleri
+tk.Button(window, text="Standart Mod", font=("Arial", 14), command=switch_to_standard).grid(row=7, column=0, columnspan=2, sticky="nsew", padx=5, pady=5)
+tk.Button(window, text="Bilimsel Mod", font=("Arial", 14), command=switch_to_scientific).grid(row=7, column=2, columnspan=2, sticky="nsew", padx=5, pady=5)
+
+
 
 # Tema değiştirme butonu
 theme_button = tk.Button(window, text="Karanlık Mod", font=("Arial", 14),
                          command=change_theme, width=20)
-theme_button.grid(row=7, column=0, columnspan=4, pady=10)
+theme_button.grid(row=9, column=0, columnspan=4, pady=10)
 
 # Geçmiş için Listbox
 history_listbox = tk.Listbox(window, height=5, font=("Arial", 12))
