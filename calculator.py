@@ -76,6 +76,15 @@ def update_history():
     for item in history[-5:]:  # Son 5 işlemi göster
         history_listbox.insert(tk.END, item)
 
+# Klavye desteği
+def keypress(event):
+    if event.char.isdigit() or event.char in "+-*/.=":
+        button_click(event.char)
+    elif event.keysym == "Return":  # Enter tuşu "=" işlemini çağırır
+        button_click("=")
+    elif event.keysym == "Escape":  # Escape tuşu "C" işlemini çağırır
+        button_click("C")
+
 # Tkinter penceresi
 window = tk.Tk()
 window.title("Hesap Makinesi")
@@ -122,6 +131,9 @@ for i in range(9):  # 0-8 satır
     window.grid_rowconfigure(i, weight=1)
 for j in range(4):  # 0-3 sütun
     window.grid_columnconfigure(j, weight=1)
+
+# Klavye olaylarını pencereye bağla
+window.bind("<Key>", keypress)
 
 # Tkinter döngüsü
 window.mainloop()
