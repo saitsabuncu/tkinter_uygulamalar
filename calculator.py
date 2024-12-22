@@ -19,6 +19,9 @@ def button_click(value):
                 raise ZeroDivisionError
             entry_field.delete(0, tk.END)
             entry_field.insert(tk.END, str(result))
+            # Geçmişi güncelle
+            history.append(f"{entry_field.get()} = {result}")
+            update_history()
         except ZeroDivisionError:
             entry_field.delete(0, tk.END)
             entry_field.insert(tk.END, "Hata: Sıfıra bölünemez")
