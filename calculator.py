@@ -85,7 +85,7 @@ def change_theme():
         window.config(bg="white")
         entry_field.config(bg="white", fg="black")
         for button in all_buttons:
-            button.config(bg="lightgray", fg="black")
+            button.config(bg="light gray", fg="black")
         theme_button.config(text="Karanlık Mod")
         dark_mode = False
 
@@ -108,15 +108,15 @@ def load_history():
         pass
 def update_buttons(button_set):
     """Dinamik olarak butonları günceller."""
-    for btn in all_buttons:
-        btn.grid_forget()  # Mevcut düğmeleri gizle
+    for my_btn in all_buttons:
+        my_btn.grid_forget()  # Mevcut düğmeleri gizle
     all_buttons.clear()  # Tüm düğme listesini temizle
     for row_index, row in enumerate(button_set):
         for col_index, button in enumerate(row):
-            btn = tk.Button(button_frame, text=button, font=("Verdana", 18), bg="lightgray", fg="black",
-                            command=lambda value=button: button_click(value))
-            btn.grid(row=row_index, column=col_index, sticky="nsew", padx=5, pady=5)
-            all_buttons.append(btn)
+            my_btn = tk.Button(button_frame, text=button, font=("Verdana", 18), bg="lightgray", fg="black",
+                               command=lambda value=button: button_click(value))
+            my_btn.grid(row=row_index, column=col_index, sticky="nsew", padx=5, pady=5)
+            all_buttons.append(my_btn)
 
 # Tkinter penceresi ve diğer kodlar aşağıda devam ediyor
 window = tk.Tk()
@@ -178,7 +178,7 @@ button_labels = [
 
 all_buttons = []
 for i, label in enumerate(button_labels):
-    btn = tk.Button(button_frame, text=label, font=("Verdana", 18), bg="lightgray", fg="black",
+    btn = tk.Button(button_frame, text=label, font=("Verdana", 18), bg="light gray", fg="black",
                     command=lambda value=label: button_click(value))
     btn.grid(row=i // 4, column=i % 4, sticky="nsew", padx=5, pady=5)
     all_buttons.append(btn)
