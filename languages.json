@@ -1,0 +1,22 @@
+{
+    "en": {
+        "standard": "Standard Mode",
+        "scientific": "Scientific Mode",
+        "clear": "C",
+        "backspace": "CE",
+        "equal": "=",
+        "dark_mode": "Dark Mode",
+        "error_divide_by_zero": "Error: Cannot divide by zero",
+        "error_invalid_input": "Error: Invalid input"
+    },
+    "tr": {
+        "standard": "Standart Mod",
+        "scientific": "Bilimsel Mod",
+        "clear": "Temizle",
+        "backspace": "Geri Al",
+        "equal": "=",
+        "dark_mode": "Karanlık Mod",
+        "error_divide_by_zero": "Hata: Sıfıra bölünemez",
+        "error_invalid_input": "Hata: Geçersiz giriş"
+    }
+}
