@@ -1,7 +1,8 @@
 import tkinter as tk
 
 memory = 0  # Bellek değişkeni
-dark_mode = False  # Tema durumu: Varsayılan olarak açık tema
+dark_mode = False  # Tema durumu
+history = []  # Geçmiş listesi
 
 # Tuşların işlevi
 def button_click(value):
@@ -66,11 +67,17 @@ def change_theme():
             button.config(bg="lightgray", fg="black")
         theme_button.config(text="Karanlık Mod")
         dark_mode = False
+
+def update_history():
+    history_listbox.delete(0, tk.END)
+    for item in history[-5:]:  # Son 5 işlemi göster
+        history_listbox.insert(tk.END, item)
+
 # Tkinter penceresi
 window = tk.Tk()
 window.title("Hesap Makinesi")
-window.geometry("400x600")
-window.resizable(0, 0)
+window.geometry("400x750")
+window.resizable(True, True)
 
 # Ekran
 entry_field = tk.Entry(window, font=("Arial", 24), borderwidth=2, relief="solid",
@@ -103,7 +110,15 @@ theme_button = tk.Button(window, text="Karanlık Mod", font=("Arial", 14),
                          command=change_theme, width=20)
 theme_button.grid(row=7, column=0, columnspan=4, pady=10)
 
+# Geçmiş için Listbox
+history_listbox = tk.Listbox(window, height=5, font=("Arial", 12))
+history_listbox.grid(row=8, column=0, columnspan=4, padx=10, pady=10)
 
+# Satır ve sütun genişlemesini ayarla
+for i in range(9):  # 0-8 satır
+    window.grid_rowconfigure(i, weight=1)
+for j in range(4):  # 0-3 sütun
+    window.grid_columnconfigure(j, weight=1)
 
 # Tkinter döngüsü
 window.mainloop()
