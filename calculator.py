@@ -160,16 +160,6 @@ entry_field = tk.Entry(window, font=("Arial", 24), borderwidth=2, relief="solid"
                        justify="right")
 entry_field.grid(row=0, column=0, columnspan=4, ipadx=8, ipady=25, padx=10, pady=10)
 
-
-#buttons = [
-    ["C", "CE", "%", "/"],
-    ["7", "8", "9", "*"],
-    ["4", "5", "6", "-"],
-    ["1", "2", "3", "+"],
-    ["+/-", "0", ".", "="],
-    ["MC", "M+", "M-", "MR"]
-]
-
 # Tuşları oluştur ve yerleştir
 all_buttons = []
 switch_to_standard()
