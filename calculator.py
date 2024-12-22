@@ -88,35 +88,6 @@ def update_buttons(button_set):
             btn.grid(row=i+1, column=j, sticky="nsew", padx=5, pady=5)
             all_buttons.append(btn)
 
-def switch_to_standard():
-    """Standart mod tuşlarını yükler."""
-    button_set = [
-        ["C", "CE", "%", "/"],
-        ["7", "8", "9", "*"],
-        ["4", "5", "6", "-"],
-        ["1", "2", "3", "+"],
-        ["+/-", "0", ".", "="],
-        ["MC", "M+", "M-", "MR"]
-    ]
-    update_buttons(button_set)
-    # Geçmiş kutusunu standart modda göster
-    history_listbox.grid(row=8, column=0, columnspan=4, padx=10, pady=10)
-
-def switch_to_scientific():
-    """Bilimsel mod tuşlarını yükler."""
-    button_set = [
-        ["C", "CE", "sin", "cos"],
-        ["tan", "log", "√", "^"],
-        ["7", "8", "9", "*"],
-        ["4", "5", "6", "-"],
-        ["1", "2", "3", "+"],
-        ["+/-", "0", ".", "="]
-    ]
-    update_buttons(button_set)
-    # Geçmiş kutusunu bilimsel modda gizle
-    history_listbox.grid_forget()
-
-
 def change_theme():
     global dark_mode
     if not dark_mode: # Karanlık moda geçiş
@@ -160,6 +131,38 @@ entry_field = tk.Entry(window, font=("Arial", 24), borderwidth=2, relief="solid"
                        justify="right")
 entry_field.grid(row=0, column=0, columnspan=4, ipadx=8, ipady=25, padx=10, pady=10)
 
+# Geçmiş için Listbox
+history_listbox = tk.Listbox(window, height=5, font=("Arial", 12))
+history_listbox.grid(row=8, column=0, columnspan=4, padx=10, pady=10)
+
+def switch_to_standard():
+    """Standart mod tuşlarını yükler."""
+    button_set = [
+        ["C", "CE", "%", "/"],
+        ["7", "8", "9", "*"],
+        ["4", "5", "6", "-"],
+        ["1", "2", "3", "+"],
+        ["+/-", "0", ".", "="],
+        ["MC", "M+", "M-", "MR"]
+    ]
+    update_buttons(button_set)
+    # Geçmiş kutusunu standart modda göster
+    history_listbox.grid(row=8, column=0, columnspan=4, padx=10, pady=10)
+
+def switch_to_scientific():
+    """Bilimsel mod tuşlarını yükler."""
+    button_set = [
+        ["C", "CE", "sin", "cos"],
+        ["tan", "log", "√", "^"],
+        ["7", "8", "9", "*"],
+        ["4", "5", "6", "-"],
+        ["1", "2", "3", "+"],
+        ["+/-", "0", ".", "="]
+    ]
+    update_buttons(button_set)
+    # Geçmiş kutusunu bilimsel modda gizle
+    history_listbox.grid_forget()
+
 # Tuşları oluştur ve yerleştir
 all_buttons = []
 switch_to_standard()
@@ -175,9 +178,7 @@ theme_button = tk.Button(window, text="Karanlık Mod", font=("Arial", 14),
                          command=change_theme, width=20)
 theme_button.grid(row=9, column=0, columnspan=4, pady=10)
 
-# Geçmiş için Listbox
-history_listbox = tk.Listbox(window, height=5, font=("Arial", 12))
-history_listbox.grid(row=8, column=0, columnspan=4, padx=10, pady=10)
+
 
 # Satır ve sütun genişlemesini ayarla
 for i in range(9):  # 0-8 satır
