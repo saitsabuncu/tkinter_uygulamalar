@@ -23,6 +23,23 @@ def button_click(value):
         memory = 0
         entry_field.delete(0, tk.END)
         entry_field.insert(tk.END,"Bellek sıfırlandı")
+    elif value == "M+":  # Belleğe ekle
+        try:
+            memory += float(entry_field.get())
+            entry_field.delete(0, tk.END)
+        except ValueError:
+            entry_field.delete(0, tk.END)
+            entry_field.insert(tk.END, "Hata: Geçerli bir sayı girin!")
+    elif value == "M-":  # Bellekten çıkar
+        try:
+            memory -= float(entry_field.get())
+            entry_field.delete(0, tk.END)
+        except ValueError:
+            entry_field.delete(0, tk.END)
+            entry_field.insert(tk.END, "Hata: Geçerli bir sayı girin!")
+    elif value == 'MR': # Belleği getir
+        entry_field.delete(0, tk.END)
+        entry_field.insert(tk.END, str(memory))
 
     else:
         entry_field.insert(tk.END, value)
