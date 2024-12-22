@@ -5,7 +5,10 @@ memory = 0  # Bellek değişkeni
 def button_click(value):
     global memory
     if value == "C":
-        entry_field.delete(0, tk.END)
+        entry_field.delete(0, tk.END) # Tüm girdiyi temizler
+    elif value == 'CE':
+        current_text = entry_field.get()
+        entry_field.delete(len(current_text) - 1, tk.END)  # Son karakteri siler
     elif value == "=":
         try:
             result = eval(entry_field.get())
@@ -51,7 +54,8 @@ window.geometry("400x600")
 window.resizable(0, 0)
 
 # Ekran
-entry_field = tk.Entry(window, font=("Arial", 24), borderwidth=2, relief="solid", justify="right")
+entry_field = tk.Entry(window, font=("Arial", 24), borderwidth=2, relief="solid",
+                       justify="right")
 entry_field.grid(row=0, column=0, columnspan=4, ipadx=8, ipady=25, padx=10, pady=10)
 
 # Tuşlar
@@ -61,7 +65,7 @@ buttons = [
     ["4", "5", "6", "-"],
     ["1", "2", "3", "+"],
     ["+/-", "0", ".", "="],
-["MC", "M+", "M-", "MR"]
+    ["MC", "M+", "M-", "MR"]
 ]
 
 # Tuşları oluştur ve yerleştir
