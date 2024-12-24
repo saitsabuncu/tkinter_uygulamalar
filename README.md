@@ -59,19 +59,6 @@ Bu proje, Python'un Tkinter kütüphanesi kullanılarak geliştirilen bir dizi G
   ```
 
 ---
-
-### 5. **Listbox ve OOP (listbox_oop.py)**
-- **Açıklama:** Tkinter kullanılarak listbox işlemleri için nesne yönelimli bir yapı (OOP) kullanan uygulama.
-- **Özellikler:**
-  - Eleman ekleme, silme ve taşıma işlemleri.
-  - Sınıf yapısı ile düzenli bir kod organizasyonu.
-- **Başlatmak için:**
-  ```bash
-  python listbox_oop.py
-  ```
-
----
-
 ## Gereksinimler
 Bu uygulamaları çalıştırmadan önce aşağıdaki gereksinimlerin yüklü olduğundan emin olun:
 - **Python 3.7+**
